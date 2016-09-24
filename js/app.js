@@ -8,13 +8,41 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 
         .state('main', {
             url: '/main',
-            templateUrl: 'views/main.html'
+            views: {
+                'mainView': {
+                    templateUrl: 'views/main.html'
+                }
+            }
         })
 
         .state('main.manufacturers', {
             url: '/manufacturers',
-            templateUrl: 'views/manufacturers/list.html',
-            controller: 'ManufacturersList'
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/manufacturers/list.html',
+                    controller: 'ManufacturersList'
+                }
+            }
+        })
+
+        .state('main.manufacturers.create', {
+            url: '/create',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/manufacturers/create.html',
+                    controller: 'ManufacturersCreate'
+                }
+            }
+        })
+
+        .state('main.manufacturers.update', {
+            url: '/update/:id',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/manufacturers/update.html',
+                    controller: 'ManufacturersUpdate'
+                }
+            }
         })
 
 }]);

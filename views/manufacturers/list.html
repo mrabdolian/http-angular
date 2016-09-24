@@ -1,8 +1,12 @@
-<a ui-sref="main">Back</a> - List of Manufacturers:<br>
+<a ui-sref="main">Back</a> - List of Manufacturers:<br><br>
+<a ui-sref="main.manufacturers.create">Create (+)</a><br>
 <ul>
     <li ng-repeat="man in manufacturers">
         Title: {{man.title}}<br>
-        ID: {{man.id}}<br><br>
+        ID: {{man.id}}<br>
+        <button type="button" ng-click="delete(man.id)">Delete</button>
+        <button ui-sref="main.manufacturers.update({'id': man.id})">Update</button>
+        <br><br>
     </li>
 </ul>
 {{status}}
