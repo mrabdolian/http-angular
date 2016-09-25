@@ -45,6 +45,36 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             }
         })
 
+        .state('main.accessoryCats', {
+            url: '/accessoryCats',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/accessory-categories/list.html',
+                    controller: 'AccessoryCatsList'
+                }
+            }
+        })
+
+        .state('main.accessoryCats.create', {
+            url: '/create',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/accessory-categories/create.html',
+                    controller: 'AccessoryCatsCreate'
+                }
+            }
+        })
+
+        .state('main.accessoryCats.update', {
+            url: '/update/:id',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/accessory-categories/update.html',
+                    controller: 'AccessoryCatsUpdate'
+                }
+            }
+        })
+
 }]);
 
 app.controller('MainCtrl', ['$scope', function ($scope) {

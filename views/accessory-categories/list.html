@@ -1,0 +1,12 @@
+<a ui-sref="main">Back</a> - List of Accessory Categories:<br><br>
+<a ui-sref="main.accessoryCats.create">Create (+)</a><br>
+<ul>
+    <li ng-repeat="accessoryCat in accessoryCategories">
+        Title: {{accessoryCat.title}}<br>
+        ID: {{accessoryCat.id}}<br>
+        <button type="button" ng-click="delete(accessoryCat.id)">Delete</button>
+        <button ui-sref="main.accessoryCats.update({'id': accessoryCat.id})">Update</button>
+        <br><br>
+    </li>
+</ul>
+{{status}}

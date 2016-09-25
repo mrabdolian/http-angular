@@ -1,9 +1,9 @@
-app.controller('ManufacturersCreate', ['$scope', '$http', function ($scope, $http) {
+app.controller('AccessoryCatsCreate', ['$scope', '$http', function ($scope, $http) {
 
     $scope.create = function () {
         $http({
             method: 'POST',
-            url: 'http://karamobile.delecs.com:3000/api/Manufacturers',
+            url: 'http://karamobile.delecs.com:3000/api/AccessoryCategories',
             headers: {
                 'Content-type': 'application/json'
             },
