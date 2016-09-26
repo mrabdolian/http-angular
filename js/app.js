@@ -45,6 +45,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             }
         })
 
+        .state('main.manufacturers.details', {
+            url: '/details/:id',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/manufacturers/details.html',
+                    controller: 'ManufacturersDetails'
+                }
+            }
+        })
+
         .state('main.accessoryCats', {
             url: '/accessoryCats',
             views: {
@@ -71,6 +81,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 'mainView@': {
                     templateUrl: 'views/accessory-categories/update.html',
                     controller: 'AccessoryCatsUpdate'
+                }
+            }
+        })
+
+        .state('main.accessoryCats.details', {
+            url: '/details/:id',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/accessory-categories/details.html',
+                    controller: 'AccessoryCatsDetails'
                 }
             }
         })

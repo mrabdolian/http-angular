@@ -5,7 +5,8 @@
         Title: {{man.title}}<br>
         ID: {{man.id}}<br>
         <button type="button" ng-click="delete(man.id)">Delete</button>
-        <button ui-sref="main.manufacturers.update({'id': man.id})">Update</button>
+        <button type="button" ui-sref="main.manufacturers.update({'id': man.id})">Update</button>
+        <button type="button" ui-sref="main.manufacturers.details({'id': man.id})">Details</button>
         <br><br>
     </li>
 </ul>

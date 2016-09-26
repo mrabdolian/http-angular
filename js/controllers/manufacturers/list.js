@@ -10,6 +10,8 @@ app.controller('ManufacturersList', ['$scope', '$http', function ($scope, $http)
         }).then(function (response) {
             $scope.status = response.status + " " + response.statusText;
             $scope.manufacturers = response.data;
+        }, function (response) {
+            $scope.status = response.status + " " + response.statusText;
         });
     };
 
