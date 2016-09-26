@@ -95,6 +95,46 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             }
         })
 
+        .state('main.accessories', {
+            url: '/accessories',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/accessories/list.html',
+                    controller: 'AccessoriesList'
+                }
+            }
+        })
+
+        .state('main.accessories.create', {
+            url: '/create',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/accessories/create.html',
+                    controller: 'AccessoriesCreate'
+                }
+            }
+        })
+
+        .state('main.accessories.update', {
+            url: '/update/:id',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/accessories/update.html',
+                    controller: 'AccessoriesUpdate'
+                }
+            }
+        })
+
+        .state('main.accessories.details', {
+            url: '/details/:id',
+            views: {
+                'mainView@': {
+                    templateUrl: 'views/accessories/details.html',
+                    controller: 'AccessoriesDetails'
+                }
+            }
+        })
+
 }]);
 
 app.controller('MainCtrl', ['$scope', function ($scope) {

@@ -5,6 +5,8 @@ app.controller('ManufacturersUpdate', ['$scope', '$stateParams', '$http', functi
 
     $http.get(url).then(function (response) {
         $scope.title = response.data.title;
+    }, function (response) {
+        // error while loading manufacturer data
     });
 
     $scope.update = function () {

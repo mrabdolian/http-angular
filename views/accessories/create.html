@@ -1,0 +1,27 @@
+<a ui-sref="main.accessories">Back</a> - Create an Accessory:<br><br>
+
+<form ng-submit="create()">
+    <label>Title:</label>
+    <input ng-model="accessory.title" type="text">
+
+    <br><br>
+
+    <label>ID (optional):</label>
+    <input ng-model="accessory.id" type="text">
+
+    <br><br>
+
+    <label>Manufacturer ID (optional):</label>
+    <select ng-model="accessory.manufacturerId">
+        <option ng-repeat="man in manufacturers">{{man.id}}</option>
+    </select>
+
+    <br><br>
+
+    <label>Image file (optional): [NOT WORKING YET]</label>
+    <input type="file">
+
+    <br><br>
+
+    <button type="submit">Create</button>
+</form>
