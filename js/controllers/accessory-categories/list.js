@@ -15,19 +15,30 @@ app.controller('AccessoryCatsList', ['$scope', '$http', function ($scope, $http)
 
     getAccessoryCats();
 
-    $scope.delete = function (id) {
-        var confirm = window.confirm('Are you sure to DELETE ' + id + '?');
-        if(confirm) {
+    $scope.delete = function (accessoryCat) {
+
+        swal({
+            title: 'Are you sure?',
+            text: 'Are you sure you want to Delete item with ID: "' + accessoryCat.id + '" ?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            confirmButtonColor: '#d9534f',
+            cancelButtonText: 'No',
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true
+        }, function () {
             $http({
                 method: 'DELETE',
-                url: 'http://karamobile.delecs.com:3000/api/AccessoryCategories/' + id
+                url: 'http://karamobile.delecs.com:3000/api/AccessoryCategories/' + accessoryCat.id
             }).then(function (response) {
-                alert('Successfully Deleted! (' + response.status + ')\nCount: ' + response.data.count);
-                getAccessoryCats(); // get data again after successful delete
+                swal('Successfully Deleted!',
+                    response.status + ' ' + response.statusText + '\nCount: ' + response.data.count, 'success');
+                $scope.accessoryCategories.splice($scope.accessoryCategories.indexOf(accessoryCat), 1);
             }, function (response) {
-                alert('Failure! (' + response.status + response.statusText + ')');
+                swal('Failure!', response.status + ' ' + response.statusText, 'error');
             })
-        }
+        });
 
     };
 

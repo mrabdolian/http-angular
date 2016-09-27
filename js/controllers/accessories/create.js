@@ -26,9 +26,9 @@ app.controller('AccessoriesCreate', ['$scope', '$http', function ($scope, $http)
                 manufacturerId: $scope.accessory.manufacturerId
             }
         }).then(function (response) {
-            alert('Successful (' + response.status + ')');
+            swal('Successful!', response.status + ' ' + response.statusText, 'success');
         }, function (response) {
-            alert('Failure (' + response.status + ' - ' + response.statusText + ')');
+            swal('Failure!', response.status + ' ' + response.statusText, 'error');
         })
     }
 

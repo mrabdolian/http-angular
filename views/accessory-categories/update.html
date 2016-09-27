@@ -1,10 +1,14 @@
-<a ui-sref="main.accessoryCats">Back</a> - Update Accessory Category: (id: {{id}})<br><br>
+<b><a ui-sref="main.accessoryCats">Back</a> - Update Accessory Category:</b><br><br>
+
+<label>ID: {{accessoryCat.id}}</label>
+
+<br><br>
 
 <form ng-submit="update()">
     <label>Title:</label>
-    <input ng-model="title" type="text">
+    <input ng-model="accessoryCat.title" type="text">
 
     <br><br>
 
-    <button type="submit">Update</button>
+    <button class="btn btn-warning" type="submit">Update</button>
 </form>

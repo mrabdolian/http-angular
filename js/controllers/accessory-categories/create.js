@@ -12,9 +12,9 @@ app.controller('AccessoryCatsCreate', ['$scope', '$http', function ($scope, $htt
                 id: $scope.id
             }
         }).then(function (response) {
-            alert('Successful (' + response.status + ')');
+            swal('Successful!', response.status + ' ' + response.statusText, 'success');
         }, function (response) {
-            alert('Failure (' + response.status + ' - ' + response.statusText + ')');
+            swal('Failure!', response.status + ' ' + response.statusText, 'error');
         })
     }
 

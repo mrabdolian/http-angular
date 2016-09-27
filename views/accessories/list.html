@@ -1,12 +1,12 @@
-<a ui-sref="main">Back</a> - List of Accessories:<br><br>
-<a ui-sref="main.accessories.create">Create (+)</a><br>
+<b><a ui-sref="main">Back</a> - List of Accessories:</b><br><br>
+<a ui-sref="main.accessories.create">Create (+)</a><br><br>
 <ul>
     <li ng-repeat="accessory in accessories">
         Title: {{accessory.title}}<br>
         ID: {{accessory.id}}<br>
-        <button type="button" ng-click="delete(accessory.id)">Delete</button>
-        <button ui-sref="main.accessories.update({'id': accessory.id})">Update</button>
-        <button type="button" ui-sref="main.accessories.details({'id': accessory.id})">Details</button>
+        <button class="btn btn-danger btn-sm" type="button" ng-click="delete(accessory)">Delete</button>
+        <button class="btn btn-warning btn-sm" ui-sref="main.accessories.update({'id': accessory.id})">Update</button>
+        <button class="btn btn-success btn-sm" type="button" ui-sref="main.accessories.details({'id': accessory.id})">Details</button>
         <br><br>
     </li>
 </ul>

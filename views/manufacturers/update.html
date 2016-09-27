@@ -1,10 +1,14 @@
-<a ui-sref="main.manufacturers">Back</a> - Update Manufacturer: (id: {{id}})<br><br>
+<b><a ui-sref="main.manufacturers">Back</a> - Update Manufacturer:</b><br><br>
+
+<label>ID: {{man.id}}</label>
+
+<br><br>
 
 <form ng-submit="update()">
     <label>Title:</label>
-    <input ng-model="title" type="text">
+    <input ng-model="man.title" type="text">
 
     <br><br>
 
-    <button type="submit">Update</button>
+    <button class="btn btn-warning" type="submit">Update</button>
 </form>

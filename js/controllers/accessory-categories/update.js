@@ -4,7 +4,7 @@ app.controller('AccessoryCatsUpdate', ['$scope', '$stateParams', '$http', functi
     var url = 'http://karamobile.delecs.com:3000/api/AccessoryCategories/' + $scope.id;
 
     $http.get(url).then(function (response) {
-        $scope.title = response.data.title;
+        $scope.accessoryCat = response.data;
     });
 
     $scope.update = function () {
@@ -16,13 +16,12 @@ app.controller('AccessoryCatsUpdate', ['$scope', '$stateParams', '$http', functi
                 'Content-type': 'application/json'
             },
             data: {
-                title: $scope.title
+                title: $scope.accessoryCat.title
             }
         }).then(function (response) {
-            alert('Successfully Updated! (' + response.status + ')\n' +
-                'Title: ' + response.data.title + ' - ID: ' + response.data.id);
+            swal('Successfully Updated!', 'Title: ' + response.data.title, 'success');
         }, function (response) {
-            alert('Failure! (' + response.status + response.statusText + ')');
+            swal('Failure!', response.status + ' ' + response.statusText, 'error');
         })
 
     };

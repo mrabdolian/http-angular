@@ -33,10 +33,10 @@ app.controller('AccessoriesUpdate', ['$scope', '$stateParams', '$http', function
                 manufacturerId: $scope.accessory.manufacturerId
             }
         }).then(function (response) {
-            alert('Successfully Updated! (' + response.status + ')\n' +
-                'Title: ' + response.data.title + ' - ID: ' + response.data.id);
+            swal('Successfully Updated!',
+                'Title: ' + response.data.title + '\nManufacturerID: ' + response.data.manufacturerId, 'success');
         }, function (response) {
-            alert('Failure! (' + response.status + response.statusText + ')');
+            swal('Failure!', response.status + ' ' + response.statusText, 'error');
         })
     };
 

@@ -1,4 +1,8 @@
-<a ui-sref="main.accessories">Back</a> - Update Accessory: (id: {{accessory.id}})<br><br>
+<b><a ui-sref="main.accessories">Back</a> - Update Accessory:</b><br><br>
+
+<label>ID: {{accessory.id}}</label>
+
+<br><br>
 
 <form ng-submit="update()">
     <label>Title:</label>
@@ -18,5 +22,5 @@
 
     <br><br>
 
-    <button type="submit">Update</button>
+    <button class="btn btn-warning" type="submit">Update</button>
 </form>

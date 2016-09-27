@@ -21,10 +21,9 @@ app.controller('ManufacturersUpdate', ['$scope', '$stateParams', '$http', functi
                 title: $scope.title
             }
         }).then(function (response) {
-            alert('Successfully Updated! (' + response.status + ')\n' +
-                'Title: ' + response.data.title + ' - ID: ' + response.data.id);
+            swal('Successfully Updated!', 'Title: ' + response.data.title, 'success');
         }, function (response) {
-            alert('Failure! (' + response.status + response.statusText + ')');
+            swal('Failure!', response.status + ' ' + response.statusText, 'error');
         })
 
     };

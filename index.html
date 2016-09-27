@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>http</title>
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/sweetalert/dist/sweetalert.css">
+    <!--<link rel="stylesheet" href="lib/sweetalert/themes/facebook/facebook.css">-->
+
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src="js/app.js"></script>
+
     <script src="js/controllers/manufacturers/list.js"></script>
     <script src="js/controllers/manufacturers/create.js"></script>
     <script src="js/controllers/manufacturers/update.js"></script>
@@ -20,6 +28,8 @@
     <script src="js/controllers/accessories/details.js"></script>
 </head>
 <body ng-app="httpApp" ng-controller="MainCtrl">
-<div ui-view="mainView"></div>
+<div class="container">
+    <br><div ui-view="mainView"></div>
+</div>
 </body>
 </html>

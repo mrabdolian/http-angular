@@ -17,19 +17,30 @@ app.controller('ManufacturersList', ['$scope', '$http', function ($scope, $http)
 
     getManufacturers();
 
-    $scope.delete = function (id) {
-        var confirm = window.confirm('Are you sure to DELETE ' + id + '?');
-        if(confirm) {
+    $scope.delete = function (manufacturer) {
+
+        swal({
+            title: 'Are you sure?',
+            text: 'Are you sure you want to Delete item with ID: "' + manufacturer.id + '" ?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            confirmButtonColor: '#d9534f',
+            cancelButtonText: 'No',
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true
+        }, function () {
             $http({
                 method: 'DELETE',
-                url: 'http://karamobile.delecs.com:3000/api/Manufacturers/' + id
+                url: 'http://karamobile.delecs.com:3000/api/Manufacturers/' + manufacturer.id
             }).then(function (response) {
-                alert('Successfully Deleted! (' + response.status + ')\nCount: ' + response.data.count);
-                getManufacturers(); // get data again after successful delete
+                swal('Successfully Deleted!',
+                    response.status + ' ' + response.statusText + '\nCount: ' + response.data.count, 'success');
+                $scope.manufacturers.splice($scope.manufacturers.indexOf(manufacturer), 1);
             }, function (response) {
-                alert('Failure! (' + response.status + response.statusText + ')');
+                swal('Failure!', response.status + ' ' + response.statusText, 'error');
             })
-        }
+        });
 
     };
 
