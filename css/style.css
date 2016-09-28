@@ -1,0 +1,16 @@
+.btn-padding {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.validation-error {
+    color: #DA3637;
+}
+
+input.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+    border-color: #DA3637;
+}
+
+input.ng-touched.ng-valid, select.ng-touched.ng-valid {
+    border-color: #509D12;
+}

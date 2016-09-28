@@ -1,10 +1,11 @@
 app.controller('ManufacturersUpdate', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
 
-    $scope.id = $stateParams.id;
-    var url = 'http://karamobile.delecs.com:3000/api/Manufacturers/' + $scope.id;
+    $scope.manufacturer = {};
+    $scope.manufacturer.id = $stateParams.id;
+    var url = 'http://karamobile.delecs.com:3000/api/Manufacturers/' + $scope.manufacturer.id;
 
     $http.get(url).then(function (response) {
-        $scope.title = response.data.title;
+        $scope.manufacturer.title = response.data.title;
     }, function (response) {
         // error while loading manufacturer data
     });
@@ -18,7 +19,7 @@ app.controller('ManufacturersUpdate', ['$scope', '$stateParams', '$http', functi
                 'Content-type': 'application/json'
             },
             data: {
-                title: $scope.title
+                title: $scope.manufacturer.title
             }
         }).then(function (response) {
             swal('Successfully Updated!', 'Title: ' + response.data.title, 'success');

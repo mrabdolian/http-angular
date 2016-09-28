@@ -8,8 +8,8 @@ app.controller('AccessoryCatsCreate', ['$scope', '$http', function ($scope, $htt
                 'Content-type': 'application/json'
             },
             data: {
-                title: $scope.title,
-                id: $scope.id
+                title: $scope.accessoryCat.title,
+                id: $scope.accessoryCat.id
             }
         }).then(function (response) {
             swal('Successful!', response.status + ' ' + response.statusText, 'success');

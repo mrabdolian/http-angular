@@ -8,8 +8,8 @@ app.controller('ManufacturersCreate', ['$scope', '$http', function ($scope, $htt
                 'Content-type': 'application/json'
             },
             data: {
-                title: $scope.title,
-                id: $scope.id
+                title: $scope.man.title,
+                id: $scope.man.id
             }
         }).then(function (response) {
             swal('Successful!', response.status + ' ' + response.statusText, 'success');
