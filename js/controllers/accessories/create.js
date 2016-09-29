@@ -1,35 +1,21 @@
-app.controller('AccessoriesCreate', ['$scope', '$http', function ($scope, $http) {
+app.controller('AccessoriesCreate', ['$scope', function ($scope) {
 
-    var getManufacturers = function () {
-        $http.get('http://karamobile.delecs.com:3000/api/Manufacturers').then(function (response) {
-            $scope.manufacturers = response.data;
-        }, function (response) {
-            // error while loading manufacturers ids
-        });
-    };
+    // Get manufacturers array to list their IDs for selecting in form (handle relation)
+    $scope.manufacturers = $scope.Resource.query({entity: 'Manufacturers'}, function () {
+    }, function (response) {
+        swal('Failed to load Manufacturers List', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+    });
 
-    getManufacturers();
+    // TODO: fill accessory.images array before sending request
 
     $scope.create = function () {
-        $http({
-            method: 'POST',
-            url: 'http://karamobile.delecs.com:3000/api/Accessories',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            data: {
-                // images: [
-                //     "url1"
-                // ],
-                title: $scope.accessory.title,
-                id: $scope.accessory.id,
-                manufacturerId: $scope.accessory.manufacturerId
-            }
-        }).then(function (response) {
-            swal('Successful!', response.status + ' ' + response.statusText, 'success');
+
+        $scope.Resource.save({entity: 'Accessories'}, $scope.accessory, function (response) {
+            swal('Successfully Created!', 'ID: ' + response.id, 'success');
         }, function (response) {
-            swal('Failure!', response.status + ' ' + response.statusText, 'error');
-        })
-    }
+            swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+        });
+
+    };
 
 }]);

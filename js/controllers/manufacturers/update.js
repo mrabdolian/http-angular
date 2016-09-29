@@ -1,31 +1,26 @@
-app.controller('ManufacturersUpdate', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
+app.controller('ManufacturersUpdate', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
 
-    $scope.manufacturer = {};
-    $scope.manufacturer.id = $stateParams.id;
-    var url = 'http://karamobile.delecs.com:3000/api/Manufacturers/' + $scope.manufacturer.id;
+    var id = $stateParams.id;
+    $scope.manufacturer = {id: id};
 
-    $http.get(url).then(function (response) {
-        $scope.manufacturer.title = response.data.title;
+    $scope.manufacturer = $scope.Resource.get({entity: 'Manufacturers', id: id}, function () {
     }, function (response) {
-        // error while loading manufacturer data
+        swal({
+            title: 'Failed to load Manufacturer',
+            text: response.status + ' ' + response.statusText + '\nError:' + response.data.error.message,
+            type: 'error'
+        }, function (isConfirmed) {
+            $state.go('main.manufacturers');
+        });
     });
 
     $scope.update = function () {
 
-        $http({
-            method: 'PUT',
-            url: url,
-            headers: {
-                'Content-type': 'application/json'
-            },
-            data: {
-                title: $scope.manufacturer.title
-            }
-        }).then(function (response) {
-            swal('Successfully Updated!', 'Title: ' + response.data.title, 'success');
+        $scope.Resource.update({entity: 'Manufacturers', id: id}, $scope.manufacturer, function (response) {
+            swal('Successfully Updated!', 'ID: ' + response.id, 'success');
         }, function (response) {
-            swal('Failure!', response.status + ' ' + response.statusText, 'error');
-        })
+            swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+        });
 
     };
 

@@ -1,19 +1,16 @@
-app.controller('AccessoryCatsList', ['$scope', '$http', function ($scope, $http) {
+app.controller('AccessoryCatsList', ['$scope', '$state', function ($scope, $state) {
 
-    var getAccessoryCats = function () {
-        $http({
-            method: 'GET',
-            url: 'http://karamobile.delecs.com:3000/api/AccessoryCategories',
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(function (response) {
-            $scope.status = response.status + " " + response.statusText;
-            $scope.accessoryCategories = response.data;
+    // Get Data from the server
+    $scope.accessoryCategories = $scope.Resource.query({entity: 'AccessoryCategories'},function () {
+    }, function (response) {
+        swal({
+            title: 'Failed to load Accessory Categories',
+            text: response.status + ' ' + response.statusText + '\nError:' + response.data.error.message,
+            type: 'error'
+        }, function (isConfirmed) {
+            $state.go('main');
         });
-    };
-
-    getAccessoryCats();
+    });
 
     $scope.delete = function (accessoryCat) {
 
@@ -28,16 +25,15 @@ app.controller('AccessoryCatsList', ['$scope', '$http', function ($scope, $http)
             closeOnConfirm: false,
             showLoaderOnConfirm: true
         }, function () {
-            $http({
-                method: 'DELETE',
-                url: 'http://karamobile.delecs.com:3000/api/AccessoryCategories/' + accessoryCat.id
-            }).then(function (response) {
-                swal('Successfully Deleted!',
-                    response.status + ' ' + response.statusText + '\nCount: ' + response.data.count, 'success');
+
+            // Delete a Manufacturer from the server
+            $scope.Resource.delete({entity: 'AccessoryCategories', id: accessoryCat.id}, function (response) {
+                swal('Successfully Deleted!', 'ID: "' + accessoryCat.id + '"\nCount: ' + response.count, 'success');
                 $scope.accessoryCategories.splice($scope.accessoryCategories.indexOf(accessoryCat), 1);
             }, function (response) {
-                swal('Failure!', response.status + ' ' + response.statusText, 'error');
-            })
+                swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+            });
+
         });
 
     };

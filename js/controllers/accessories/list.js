@@ -1,19 +1,16 @@
-app.controller('AccessoriesList', ['$scope', '$http', function ($scope, $http) {
+app.controller('AccessoriesList', ['$scope', function ($scope) {
 
-    var getAccessories = function () {
-        $http({
-            method: 'GET',
-            url: 'http://karamobile.delecs.com:3000/api/Accessories',
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(function (response) {
-            $scope.status = response.status + " " + response.statusText;
-            $scope.accessories = response.data;
+    // Get Data from the server
+    $scope.accessories = $scope.Resource.query({entity: 'Accessories'},function () {
+    }, function (response) {
+        swal({
+            title: 'Failed to load Accessories',
+            text: response.status + ' ' + response.statusText + '\nError:' + response.data.error.message,
+            type: 'error'
+        }, function (isConfirmed) {
+            $state.go('main');
         });
-    };
-
-    getAccessories();
+    });
 
     $scope.delete = function (accessory) {
 
@@ -28,16 +25,15 @@ app.controller('AccessoriesList', ['$scope', '$http', function ($scope, $http) {
             closeOnConfirm: false,
             showLoaderOnConfirm: true
         }, function () {
-            $http({
-                method: 'DELETE',
-                url: 'http://karamobile.delecs.com:3000/api/Accessories/' + accessory.id
-            }).then(function (response) {
-                swal('Successfully Deleted!',
-                    response.status + ' ' + response.statusText + '\nCount: ' + response.data.count, 'success');
+
+            // Delete a Manufacturer from the server
+            $scope.Resource.delete({entity: 'Accessories', id: accessory.id}, function (response) {
+                swal('Successfully Deleted!', 'ID: "' + accessory.id + '"\nCount: ' + response.count, 'success');
                 $scope.accessories.splice($scope.accessories.indexOf(accessory), 1);
             }, function (response) {
-                swal('Failure!', response.status + ' ' + response.statusText, 'error');
-            })
+                swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+            });
+
         });
 
     };

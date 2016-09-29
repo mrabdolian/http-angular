@@ -1,24 +1,17 @@
-app.controller('ManufacturersDetails', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
+app.controller('ManufacturersDetails', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
     
     var id = $stateParams.id;
 
-    var url = 'http://karamobile.delecs.com:3000/api/Manufacturers/' + id;
-
-    var getManufacturer = function () {
-        $http({
-            method: 'GET',
-            url: url,
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(function (response) {
-            $scope.status = response.status + " " + response.statusText;
-            $scope.manufacturer = response.data;
-        }, function (response) {
-            $scope.status = response.status + " " + response.statusText;
+    // Get Data from the server
+    $scope.manufacturer = $scope.Resource.get({entity: 'Manufacturers', id: id}, function () {
+    }, function (response) {
+        swal({
+            title: 'Failed to load Manufacturer',
+            text: response.status + ' ' + response.statusText + '\nError:' + response.data.error.message,
+            type: 'error'
+        }, function (isConfirmed) {
+            $state.go('main.manufacturers');
         });
-    };
-
-    getManufacturer();
+    });
 
 }]);

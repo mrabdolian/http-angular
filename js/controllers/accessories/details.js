@@ -1,24 +1,17 @@
-app.controller('AccessoriesDetails', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
+app.controller('AccessoriesDetails', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
 
     var id = $stateParams.id;
 
-    var url = 'http://karamobile.delecs.com:3000/api/Accessories/' + id;
-
-    var getAccessory = function () {
-        $http({
-            method: 'GET',
-            url: url,
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(function (response) {
-            $scope.status = response.status + " " + response.statusText;
-            $scope.accessory = response.data;
-        }, function (response) {
-            $scope.status = response.status + " " + response.statusText;
+    // Get Data from the server
+    $scope.accessory = $scope.Resource.get({entity: 'Accessories', id: id}, function () {
+    }, function (response) {
+        swal({
+            title: 'Failed to load Accessory',
+            text: response.status + ' ' + response.statusText + '\nError:' + response.data.error.message,
+            type: 'error'
+        }, function (isConfirmed) {
+            $state.go('main.accessories');
         });
-    };
-
-    getAccessory();
+    });
 
 }]);

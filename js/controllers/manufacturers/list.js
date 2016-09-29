@@ -1,21 +1,16 @@
-app.controller('ManufacturersList', ['$scope', '$http', function ($scope, $http) {
+app.controller('ManufacturersList', ['$scope', '$state', function ($scope, $state) {
 
-    var getManufacturers = function () {
-        $http({
-            method: 'GET',
-            url: 'http://karamobile.delecs.com:3000/api/Manufacturers',
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(function (response) {
-            $scope.status = response.status + " " + response.statusText;
-            $scope.manufacturers = response.data;
-        }, function (response) {
-            $scope.status = response.status + " " + response.statusText;
+    // Get Data from the server
+    $scope.manufacturers = $scope.Resource.query({entity: 'Manufacturers'}, function () {
+    }, function (response) {
+        swal({
+            title: 'Failed to load Manufacturers',
+            text: response.status + ' ' + response.statusText + '\nError:' + response.data.error.message,
+            type: 'error'
+        }, function (isConfirmed) {
+            $state.go('main');
         });
-    };
-
-    getManufacturers();
+    });
 
     $scope.delete = function (manufacturer) {
 
@@ -30,16 +25,15 @@ app.controller('ManufacturersList', ['$scope', '$http', function ($scope, $http)
             closeOnConfirm: false,
             showLoaderOnConfirm: true
         }, function () {
-            $http({
-                method: 'DELETE',
-                url: 'http://karamobile.delecs.com:3000/api/Manufacturers/' + manufacturer.id
-            }).then(function (response) {
-                swal('Successfully Deleted!',
-                    response.status + ' ' + response.statusText + '\nCount: ' + response.data.count, 'success');
+
+            // Delete a Manufacturer from the server
+            $scope.Resource.delete({entity: 'Manufacturers', id: manufacturer.id}, function (response) {
+                swal('Successfully Deleted!', 'ID: "' + manufacturer.id + '"\nCount: ' + response.count, 'success');
                 $scope.manufacturers.splice($scope.manufacturers.indexOf(manufacturer), 1);
             }, function (response) {
-                swal('Failure!', response.status + ' ' + response.statusText, 'error');
-            })
+                swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+            });
+
         });
 
     };

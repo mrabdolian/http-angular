@@ -12,7 +12,8 @@
                 <label>Title:</label>
                 <input class="form-control" name="title" type="text"
                        ng-model="accessoryCat.title" ng-required="true" ng-minlength="3" ng-maxlength="20">
-                <div class="validation-error" ng-show="form.title.$invalid && form.title.$dirty">
+                <div class="validation-error"
+                     ng-show="form.title.$invalid && (form.title.$dirty || form.title.$touched)">
                     <p ng-show="form.title.$error.required">This field is required.</p>
                     <p ng-show="form.title.$error.minlength">This field must be more than 3 characters.</p>
                     <p ng-show="form.title.$error.maxlength">This field must be less than 20 characters.</p>

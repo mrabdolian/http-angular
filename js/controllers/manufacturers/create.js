@@ -1,21 +1,13 @@
-app.controller('ManufacturersCreate', ['$scope', '$http', function ($scope, $http) {
+app.controller('ManufacturersCreate', ['$scope', function ($scope) {
 
     $scope.create = function () {
-        $http({
-            method: 'POST',
-            url: 'http://karamobile.delecs.com:3000/api/Manufacturers',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            data: {
-                title: $scope.man.title,
-                id: $scope.man.id
-            }
-        }).then(function (response) {
-            swal('Successful!', response.status + ' ' + response.statusText, 'success');
+
+        $scope.Resource.save({entity: 'Manufacturers'}, $scope.manufacturer, function (response) {
+            swal('Successfully Created!', 'ID: ' + response.id, 'success');
         }, function (response) {
-            swal('Failure!', response.status + ' ' + response.statusText, 'error');
-        })
+            swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+        });
+
     }
 
 }]);

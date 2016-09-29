@@ -8,7 +8,8 @@
                 <label>Title:</label>
                 <input class="form-control" name="title" type="text"
                        ng-model="accessoryCat.title" ng-required="true" ng-minlength="3" ng-maxlength="20">
-                <div class="validation-error" ng-show="form.title.$invalid && form.title.$dirty">
+                <div class="validation-error"
+                     ng-show="form.title.$invalid && (form.title.$dirty || form.title.$touched)">
                     <p ng-show="form.title.$error.required">This field is required.</p>
                     <p ng-show="form.title.$error.minlength">This field must be more than 3 characters.</p>
                     <p ng-show="form.title.$error.maxlength">This field must be less than 20 characters.</p>
@@ -20,11 +21,12 @@
             <div>
                 <label>ID (optional):</label>
                 <input class="form-control" name="id" type="text"
-                       ng-model="accessoryCat.id" ng-minlength="3" ng-maxlength="20" ng-pattern="^[a-fA-F\d]{24}$">
-                <div class="validation-error" ng-show="form.id.$invalid && form.id.$dirty">
+                       ng-model="accessoryCat.id" ng-minlength="3" ng-maxlength="30">
+                <div class="validation-error" ng-show="form.id.$invalid && (form.id.$dirty || form.id.$touched)">
                     <p ng-show="form.id.$error.minlength">This field must be more than 3 characters.</p>
-                    <p ng-show="form.id.$error.maxlength">This field must be less than 20 characters.</p>
-                    <p ng-show="form.id.$error.pattern">Wrong pattern.</p>
+                    <p ng-show="form.id.$error.maxlength">This field must be less than 30 characters.</p>
+                    <!--pattern: '^[a-fA-F\d]{24}$'-->
+                    <!--<p ng-show="form.id.$error.pattern">Wrong pattern.</p>-->
                 </div>
             </div>
 

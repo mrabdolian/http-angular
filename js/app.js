@@ -1,6 +1,9 @@
-var app = angular.module('httpApp', ['ui.router']);
+var app = angular.module('httpApp', ['ui.router', 'ngResource']);
 
-app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$resourceProvider', function ($stateProvider, $urlRouterProvider, $resourceProvider) {
+
+    // Don't strip trailing slashes from calculated URLs
+    $resourceProvider.defaults.stripTrailingSlashes = false;
 
     $urlRouterProvider.otherwise('/main');
 
@@ -137,7 +140,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 
 }]);
 
-app.controller('MainCtrl', ['$scope', function ($scope) {
-
-
+app.controller('MainCtrl', ['$scope', '$resource', function ($scope, $resource) {
+    $scope.Resource = $resource('http://karamobile.delecs.com:3000/api/:entity/:id',{},{
+        'update': {method: 'PUT'}
+    });
 }]);

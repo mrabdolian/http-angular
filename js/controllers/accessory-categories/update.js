@@ -1,28 +1,26 @@
-app.controller('AccessoryCatsUpdate', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
+app.controller('AccessoryCatsUpdate', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
 
-    $scope.id = $stateParams.id;
-    var url = 'http://karamobile.delecs.com:3000/api/AccessoryCategories/' + $scope.id;
+    var id = $stateParams.id;
+    $scope.accessoryCat = {id: id};
 
-    $http.get(url).then(function (response) {
-        $scope.accessoryCat = response.data;
+    $scope.accessoryCat = $scope.Resource.get({entity: 'AccessoryCategories', id: id}, function () {
+    }, function (response) {
+        swal({
+            title: 'Failed to load Accessory Category',
+            text: response.status + ' ' + response.statusText + '\nError:' + response.data.error.message,
+            type: 'error'
+        }, function (isConfirmed) {
+            $state.go('main.accessoryCats');
+        });
     });
 
     $scope.update = function () {
 
-        $http({
-            method: 'PUT',
-            url: url,
-            headers: {
-                'Content-type': 'application/json'
-            },
-            data: {
-                title: $scope.accessoryCat.title
-            }
-        }).then(function (response) {
-            swal('Successfully Updated!', 'Title: ' + response.data.title, 'success');
+        $scope.Resource.update({entity: 'AccessoryCategories', id: id}, $scope.accessoryCat, function (response) {
+            swal('Successfully Updated!', 'ID: ' + response.id, 'success');
         }, function (response) {
-            swal('Failure!', response.status + ' ' + response.statusText, 'error');
-        })
+            swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+        });
 
     };
 

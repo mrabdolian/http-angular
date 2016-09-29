@@ -1,43 +1,33 @@
-app.controller('AccessoriesUpdate', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
+app.controller('AccessoriesUpdate', ['$scope', '$state','$stateParams', function ($scope, $state, $stateParams) {
 
-    var getManufacturers = function () {
-        $http.get('http://karamobile.delecs.com:3000/api/Manufacturers').then(function (response) {
-            $scope.manufacturers = response.data;
-        }, function (response) {
-            // error while loading manufacturers ids
-        });
-    };
-
-    getManufacturers();
+    // Get manufacturers array to list their IDs for selecting in form (handle relation)
+    $scope.manufacturers = $scope.Resource.query({entity: 'Manufacturers'}, function () {
+    }, function (response) {
+        swal('Failed to load Manufacturers List', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+    });
 
     var id = $stateParams.id;
-    var url = 'http://karamobile.delecs.com:3000/api/Accessories/' + id;
+    $scope.accessory = {id: id};
 
-
-    $http.get(url).then(function (response) {
-        $scope.accessory = response.data;
+    $scope.accessory = $scope.Resource.get({entity: 'Accessories', id: id}, function () {
+    }, function (response) {
+        swal({
+            title: 'Failed to load Accessory',
+            text: response.status + ' ' + response.statusText + '\nError:' + response.data.error.message,
+            type: 'error'
+        }, function (isConfirmed) {
+            $state.go('main.accessories');
+        });
     });
 
     $scope.update = function () {
-        $http({
-            method: 'PUT',
-            url: url,
-            headers: {
-                'Content-type': 'application/json'
-            },
-            data: {
-                // images: [
-                //     "url1"
-                // ],
-                title: $scope.accessory.title,
-                manufacturerId: $scope.accessory.manufacturerId
-            }
-        }).then(function (response) {
-            swal('Successfully Updated!',
-                'Title: ' + response.data.title + '\nManufacturerID: ' + response.data.manufacturerId, 'success');
+
+        $scope.Resource.update({entity: 'Accessories', id: id}, $scope.accessory, function (response) {
+            swal('Successfully Updated!', 'ID: ' + response.id, 'success');
         }, function (response) {
-            swal('Failure!', response.status + ' ' + response.statusText, 'error');
-        })
+            swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+        });
+
     };
 
 }]);

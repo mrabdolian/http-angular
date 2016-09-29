@@ -1,21 +1,13 @@
-app.controller('AccessoryCatsCreate', ['$scope', '$http', function ($scope, $http) {
+app.controller('AccessoryCatsCreate', ['$scope', function ($scope) {
 
     $scope.create = function () {
-        $http({
-            method: 'POST',
-            url: 'http://karamobile.delecs.com:3000/api/AccessoryCategories',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            data: {
-                title: $scope.accessoryCat.title,
-                id: $scope.accessoryCat.id
-            }
-        }).then(function (response) {
-            swal('Successful!', response.status + ' ' + response.statusText, 'success');
+
+        $scope.Resource.save({entity: 'AccessoryCategories'}, $scope.accessoryCat, function (response) {
+            swal('Successfully Created!', 'ID: ' + response.id, 'success');
         }, function (response) {
-            swal('Failure!', response.status + ' ' + response.statusText, 'error');
-        })
-    }
+            swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
+        });
+
+    };
 
 }]);
