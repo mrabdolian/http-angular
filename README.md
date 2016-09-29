@@ -1,5 +1,4 @@
 # http-angular
-**Using $http with angular.js**
+**Client-side Single Page Application that uses $resource to send http requests**
 
-Skills & Frameworks used: HTML, AngularJS
-
+Skills & Frameworks used: HTML, CSS, AngularJS, Bootstrap
