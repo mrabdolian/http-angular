@@ -1,12 +1,39 @@
-<b><a ui-sref="main">Back</a> - List of Accessories:</b><br><br>
-<a ui-sref="main.accessories.create">Create (+)</a><br><br>
-<ul>
-    <li ng-repeat="accessory in accessories">
-        Title: {{accessory.title}}<br>
-        ID: {{accessory.id}}<br>
-        <button class="btn btn-danger btn-sm" type="button" ng-click="delete(accessory)">Delete</button>
-        <button class="btn btn-warning btn-sm" ui-sref="main.accessories.update({'id': accessory.id})">Update</button>
-        <button class="btn btn-success btn-sm" type="button" ui-sref="main.accessories.details({'id': accessory.id})">Details</button>
-        <br><br>
-    </li>
-</ul>
+<div class="container header-container">
+    <div class="inline">
+        <button class="btn btn-default" ui-sref="main">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+        </button>
+        <h4 class="header-title">Accessories List</h4>
+    </div>
+    <div class="inline float-right clearfix">
+        <button class="btn btn-primary" ui-sref="main.accessories.create">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create
+        </button>
+    </div>
+</div>
+<div class="container content-container">
+    <ul class="list-group" ng-repeat="accessory in accessories">
+        <li class="list-group-item">
+            <div class="inline">
+                <b>Title: </b>{{accessory.title}}<br>
+                <b>ID: </b>{{accessory.id}}<br>
+            </div>
+            <div class="inline float-right clearfix button-div">
+
+                <button class="btn btn-danger btn-sm" type="button" ng-click="delete(accessory)">
+                    <span class="glyphicon glyphicon-trash" aria-label="delete"></span>
+                    <span class="hidden-xs"> Delete</span>
+                </button>
+                <button class="btn btn-warning btn-sm" ui-sref="main.accessories.update({'id': accessory.id})">
+                    <span class="glyphicon glyphicon-pencil" aria-label="update"></span>
+                    <span class="hidden-xs"> Update</span>
+                </button>
+                <button class="btn btn-success btn-sm" type="button"
+                        ui-sref="main.accessories.details({'id': accessory.id})">
+                    <span class="glyphicon glyphicon-option-horizontal" aria-label="details"></span>
+                    <span class="hidden-xs"> Details</span>
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>

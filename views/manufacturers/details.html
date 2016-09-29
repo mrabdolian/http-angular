@@ -1,5 +1,12 @@
-<b><a ui-sref="main.manufacturers">Back</a> - Manufacturer Details:</b><br><br>
-Title: {{manufacturer.title}}<br>
-ID: {{manufacturer.id}}<br>
-<br><br>
-{{status}}
+<div class="container header-container">
+    <button class="btn btn-default" ui-sref="main.manufacturers">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+    </button>
+    <h4 class="header-title">Manufacturer Details</h4>
+</div>
+<div class="container content-container">
+    <div class="details-text">
+        <b>Title: </b>&nbsp;{{manufacturer.title}}<br>
+        <b>ID: </b>&nbsp;{{manufacturer.id}}<br>
+    </div>
+</div>

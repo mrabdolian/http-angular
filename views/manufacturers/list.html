@@ -1,12 +1,39 @@
-<b><a ui-sref="main">Back</a> - List of Manufacturers:</b><br><br>
-<a ui-sref="main.manufacturers.create">Create (+)</a><br><br>
-<ul>
-    <li ng-repeat="man in manufacturers">
-        Title: {{man.title}}<br>
-        ID: {{man.id}}<br>
-        <button class="btn btn-danger btn-sm" type="button" ng-click="delete(man)">Delete</button>
-        <button class="btn btn-warning btn-sm" type="button" ui-sref="main.manufacturers.update({'id': man.id})">Update</button>
-        <button class="btn btn-success btn-sm" type="button" ui-sref="main.manufacturers.details({'id': man.id})">Details</button>
-        <br><br>
-    </li>
-</ul>
+<div class="container header-container">
+    <div class="inline">
+        <button class="btn btn-default" ui-sref="main">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+        </button>
+        <h4 class="header-title">Manufacturers List</h4>
+    </div>
+    <div class="inline float-right clearfix">
+        <button class="btn btn-primary" ui-sref="main.manufacturers.create">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create
+        </button>
+    </div>
+</div>
+<div class="container content-container">
+    <ul class="list-group" ng-repeat="man in manufacturers">
+        <li class="list-group-item">
+            <div class="inline">
+                <b>Title: </b>{{man.title}}<br>
+                <b>ID: </b>{{man.id}}<br>
+            </div>
+            <div class="inline float-right clearfix button-div">
+
+                <button class="btn btn-danger btn-sm" type="button" ng-click="delete(man)">
+                    <span class="glyphicon glyphicon-trash" aria-label="delete"></span>
+                    <span class="hidden-xs"> Delete</span>
+                </button>
+                <button class="btn btn-warning btn-sm" ui-sref="main.manufacturers.update({'id': man.id})">
+                    <span class="glyphicon glyphicon-pencil" aria-label="update"></span>
+                    <span class="hidden-xs"> Update</span>
+                </button>
+                <button class="btn btn-success btn-sm" type="button"
+                        ui-sref="main.manufacturers.details({'id': man.id})">
+                    <span class="glyphicon glyphicon-option-horizontal" aria-label="details"></span>
+                    <span class="hidden-xs"> Details</span>
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>

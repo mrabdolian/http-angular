@@ -1,5 +1,12 @@
-<b><a ui-sref="main.accessoryCats">Back</a> - Accessory Category Details:</b><br><br>
-Title: {{accessoryCat.title}}<br>
-ID: {{accessoryCat.id}}<br>
-<br><br>
-{{status}}
+<div class="container header-container">
+    <button class="btn btn-default" ui-sref="main.accessoryCats">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+    </button>
+    <h4 class="header-title">Accessory Category Details</h4>
+</div>
+<div class="container content-container">
+    <div class="details-text">
+        <b>Title: </b>&nbsp;{{accessoryCat.title}}<br>
+        <b>ID: </b>&nbsp;{{accessoryCat.id}}<br>
+    </div>
+</div>

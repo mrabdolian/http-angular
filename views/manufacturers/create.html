@@ -1,39 +1,45 @@
-<b><a ui-sref="main.manufacturers">Back</a> - Create a Manufacturer:</b><br><br>
-
 <form ng-submit="create()" name="form" novalidate>
-    <div class="row">
-        <div class="col-md-6 col-md-push-3 col-xs-10 col-xs-push-1">
-
-            <div>
-                <label>Title:</label>
-                <input class="form-control" name="title" type="text"
-                       ng-model="manufacturer.title" ng-required="true" ng-minlength="3" ng-maxlength="20">
-                <div class="validation-error"
-                     ng-show="form.title.$invalid && (form.title.$dirty || form.title.$touched)">
-                    <p ng-show="form.title.$error.required">This field is required.</p>
-                    <p ng-show="form.title.$error.minlength">This field must be more than 3 characters.</p>
-                    <p ng-show="form.title.$error.maxlength">This field must be less than 20 characters.</p>
+    <div class="container header-container">
+        <div class="inline">
+            <button class="btn btn-default" ui-sref="main.manufacturers">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+            </button>
+            <h4 class="header-title">Create a Manufacturer</h4>
+        </div>
+        <div class="inline float-right clearfix">
+            <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create
+            </button>
+        </div>
+    </div>
+    <div class="container content-container">
+        <div class="row">
+            <div class="col-md-6 col-md-push-3 col-xs-10 col-xs-push-1">
+                <div>
+                    <label>Title:</label>
+                    <input class="form-control" name="title" type="text"
+                           ng-model="manufacturer.title" ng-required="true" ng-minlength="3" ng-maxlength="20">
+                    <div class="validation-error"
+                         ng-show="form.title.$invalid && (form.title.$dirty || form.title.$touched)">
+                        <p ng-show="form.title.$error.required">This field is required.</p>
+                        <p ng-show="form.title.$error.minlength">This field must be more than 3 characters.</p>
+                        <p ng-show="form.title.$error.maxlength">This field must be less than 20 characters.</p>
+                    </div>
                 </div>
-            </div>
 
-            <br>
+                <br>
 
-            <div>
-                <label>ID (optional):</label>
-                <input class="form-control" name="id" type="text"
-                       ng-model="manufacturer.id" ng-minlength="3" ng-maxlength="30">
-                <div class="validation-error" ng-show="form.id.$invalid && (form.id.$dirty || form.id.$touched)">
-                    <p ng-show="form.id.$error.minlength">This field must be more than 3 characters.</p>
-                    <p ng-show="form.id.$error.maxlength">This field must be less than 30 characters.</p>
-                    <!--pattern: '^[a-fA-F\d]{24}$'-->
-                    <!--<p ng-show="form.id.$error.pattern">Wrong pattern.</p>-->
+                <div>
+                    <label>ID (optional):</label>
+                    <input class="form-control" name="id" type="text"
+                           ng-model="manufacturer.id" ng-minlength="3" ng-maxlength="30">
+                    <div class="validation-error" ng-show="form.id.$invalid && (form.id.$dirty || form.id.$touched)">
+                        <p ng-show="form.id.$error.minlength">This field must be more than 3 characters.</p>
+                        <p ng-show="form.id.$error.maxlength">This field must be less than 30 characters.</p>
+                        <!--pattern: '^[a-fA-F\d]{24}$'-->
+                        <!--<p ng-show="form.id.$error.pattern">Wrong pattern.</p>-->
+                    </div>
                 </div>
-            </div>
-
-            <br><br>
-
-            <div>
-                <button class="btn btn-primary btn-padding" type="submit" ng-disabled="form.$invalid">Create</button>
             </div>
         </div>
     </div>

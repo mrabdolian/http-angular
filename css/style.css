@@ -14,3 +14,61 @@ input.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
 input.ng-touched.ng-valid, select.ng-touched.ng-valid {
     border-color: #509D12;
 }
+
+.header-container {
+    padding-top: 12px;
+    position: fixed;
+    width: 100%;
+    background-color: #f9f9f9;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #aaa;
+    z-index: 999;
+}
+
+.header-title {
+    display: inline;
+    margin-left: 10px;
+    padding-left: 9px;
+    border-left: 1px solid #ccc;
+}
+
+.float-right {
+    float: right;
+}
+
+.inline {
+    display: inline;
+}
+
+.content-container {
+    padding-top: 80px;
+}
+
+.button-div {
+    margin-top: -35px;
+}
+
+.list-group {
+    margin-bottom: 10px;
+}
+
+.list-group-item {
+    background-color: #fcfcfc;
+}
+
+.details-text {
+    line-height: 3em;
+}
+
+.main-page-title {
+    text-align: center;
+    margin-top: 80px;
+}
+
+.main-page-container {
+    padding-top:50px;
+}
+
+.main-page-container > button {
+    margin-bottom: 15px;
+}

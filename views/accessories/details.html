@@ -1,7 +1,14 @@
-<b><a ui-sref="main.accessories">Back</a> - Accessory Details:</b><br><br>
-Title: {{accessory.title}}<br>
-ID: {{accessory.id}}<br>
-Manufacturer ID: {{accessory.manufacturerId}}<br>
-Image(s): {{accessory.images}}
-<br><br>
-{{status}}
+<div class="container header-container">
+    <button class="btn btn-default" ui-sref="main.accessories">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+    </button>
+    <h4 class="header-title">Accessory Details</h4>
+</div>
+<div class="container content-container">
+    <div class="details-text">
+        <b>Title: </b>&nbsp;{{accessory.title}}<br>
+        <b>ID: </b>&nbsp;{{accessory.id}}<br>
+        <b>Manufacturer ID: </b>&nbsp;{{accessory.manufacturerId}}<br>
+        <b>Image(s): </b>&nbsp;{{accessory.images}}
+    </div>
+</div>
