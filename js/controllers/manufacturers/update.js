@@ -18,6 +18,7 @@ app.controller('ManufacturersUpdate', ['$scope', '$state', '$stateParams', funct
 
         $scope.Resource.update({entity: 'Manufacturers', id: id}, $scope.manufacturer, function (response) {
             swal('Successfully Updated!', 'ID: ' + response.id, 'success');
+            $state.go('main.manufacturers');
         }, function (response) {
             swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
         });

@@ -18,6 +18,7 @@ app.controller('AccessoryCatsUpdate', ['$scope', '$state', '$stateParams', funct
 
         $scope.Resource.update({entity: 'AccessoryCategories', id: id}, $scope.accessoryCat, function (response) {
             swal('Successfully Updated!', 'ID: ' + response.id, 'success');
+            $state.go('main.accessoryCats');
         }, function (response) {
             swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
         });

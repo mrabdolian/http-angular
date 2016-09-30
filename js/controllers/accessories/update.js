@@ -24,6 +24,7 @@ app.controller('AccessoriesUpdate', ['$scope', '$state','$stateParams', function
 
         $scope.Resource.update({entity: 'Accessories', id: id}, $scope.accessory, function (response) {
             swal('Successfully Updated!', 'ID: ' + response.id, 'success');
+            $state.go('main.accessories');
         }, function (response) {
             swal('Failed!', response.status + ' ' + response.statusText + '\nError:' + response.data.error.message, 'error');
         });
