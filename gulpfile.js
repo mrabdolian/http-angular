@@ -16,6 +16,22 @@ var html_path = '*.html';
 var css_path = 'css/*.css';
 var views_path = 'views/*.html';
 
+gulp.task('minifyCSS', function () {
+    return gulp.src(['lib/**/*.css', 'css/**/*'])
+        .pipe(plugins.concat('style.css'))
+        .pipe(plugins.cleanCss())
+        .pipe(plugins.rename('style.min.css'))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('minifyJS', function () {
+    return gulp.src(['lib/**/*.js', 'js/**/*'])
+        .pipe(plugins.concat('script.js'))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename('script.min.js'))
+        .pipe(gulp.dest('dist'));
+});
+
 // Tasks for library files: /////////////////////
 // JS files
 gulp.task('libJs', function () {
